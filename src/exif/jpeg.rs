@@ -72,7 +72,6 @@ pub fn insert_exif_at_path(path: &PathBuf, exif: &Exif) -> Result<()> {
     file.set_len(0)?;
     let mut tmp_exif = exif.buf.clone();
     if exif_index == 0 {
-        println!("No exif segment already existing to be found: Inserting new marker");
         exif_index = 2;
         tmp_exif.insert(0, 0xE1);
         tmp_exif.insert(0, 0xFF);
