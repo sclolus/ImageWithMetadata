@@ -1,11 +1,11 @@
 [package]
-name = "imagewithexif"
+name = "imagewithmetadata"
 version = "0.1.0"
 authors = ["sclolus"]
 description = "Simple crate made to extract the Exif Metadata from some image and save it to another, Only JPEG format supported for now"
 
 [lib]
-name = "imagewithexif"
+name = "imagewithmetadata"
 path = "./src/lib.rs"
 
 [dependencies]
