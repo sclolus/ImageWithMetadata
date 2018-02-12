@@ -1,6 +1,6 @@
 [package]
 name = "imagewithmetadata"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["sclolus"]
 description = "Simple crate made to extract the Exif Metadata from some image and save it to another, Only JPEG format supported for now"
 

@@ -5,7 +5,7 @@ extern crate image;
  use image::*;
 
 extern crate byteorder;
-extern crate imagewithexif;
+extern crate imagewithmetadata;
 
 
 

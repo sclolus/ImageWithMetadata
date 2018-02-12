@@ -84,7 +84,7 @@ impl JPEGMetadata {
 
 pub struct JPEGDecoderWithMetadata {
     /// Only exif is actually supported
-    pub metadata: JPEGMetadata,
+    pub metadata: Option<JPEGMetadata>,
     decoder: JPEGDecoder<File>,
 }
 
@@ -93,7 +93,10 @@ impl JPEGDecoderWithMetadata  {
     pub fn new_from_path(path: &PathBuf) -> Result<JPEGDecoderWithMetadata, ImageWithMetadataError> {
         let input_file = File::open(path)?;
         let decoder = JPEGDecoder::new(input_file);
-        let metadata = JPEGMetadata::new_from_path(path)?;
+        let metadata = match JPEGMetadata::new_from_path(path) {
+            Ok(metadata) => Some(metadata),
+            Err(_) => None,
+        };
         Ok(JPEGDecoderWithMetadata {
             metadata,
             decoder,
@@ -101,7 +104,9 @@ impl JPEGDecoderWithMetadata  {
     }
     /// Save Metadata to file at 'path'
     pub fn save_metadata_to_file(&self, path: &PathBuf) -> std::io::Result<()> {
-        self.metadata.insert_to_path(path)?;
+        if let &Some(ref metadata) = &self.metadata {
+            metadata.insert_to_path(path)?;
+        }
         Ok(())
     }
 }
